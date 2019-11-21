@@ -71,19 +71,54 @@ $^{1}$Fundação Getulio Vargas (FGV)}
     
     \maketitle
     \newpage
+
+    \newtheorem{theorem}{Teorema}
     
     \section{\uppercase{Introdução}}
     
-        \cite{bak1993punctuated}
-        \cite{guiol2009stochastic}
-        \cite{khouri2013estudos}
-    
     \section{\uppercase{Modelo Bak-Sneppen}}
-    
+
+        \citeonline{bak1993punctuated} introduziram o modelo que chamarei de Bak-Sneppen.
+        Seu funcionamento é descrito de forma direta por \citeonline{khouri2013estudos}:
+
+        \renewcommand{\theenumi}{\roman{enumi}} 
+        \begin{enumerate}
+            \item $N$ espécies são distribuídas em um grafo circular;
+            \item A cada espécie, é associado um número, chamado \textit{\textbf{fitness}}, que é uma amostra de uma distribuição uniforme em $[0, 1]$;
+            \item Em cada "rodada", o indivíduo com o menor \textit{fitness} tem seu número sorteado novamente;
+            \item O mesmo se repete para seus dois vizinhos.
+        \end{enumerate}
+
+        O modelo é relativamente simples, e no artigo é sugerido que a distribuição dos \textit{fitness} converge para $(f^*, 1]$, com $f^* \approx 2/3$.
+
     \section{\uppercase{Modelo GMS}}
 
-        \subsection{Modelo a tempo contínuo}
+        \citeonline{guiol2009stochastic} se basearam no modelo Bak-Sneppen para criar outro modelo, que \citeonline{khouri2013estudos} chama de GMS (as iniciais dos autores). Chamaremos assim neste trabalho. Ele é descrito:
 
+        \renewcommand{\theenumi}{\roman{enumi}} 
+        \begin{enumerate}
+            \item O modelo é discreto e se inicia no conjunto vazio;
+            \item A cada etapa do processo, uma espécie nasce (com probabilidade $p$) ou uma espécie morre (com probabilidade $q = 1 - p$) (se o conjunto de espécies é vazio, ele se mantém constante);
+            \item Cada espécie tem associada a si um número \textit{fitness} amostrado de uma uniforme $[0, 1]$;
+            \item Quando uma espécie morre, a escolhida é aquela com menor \textit{fitness} para morrer.
+        \end{enumerate}
+
+        Os autores apresentam alguns resultados. Seja $p$ tal que $p \in (1/2, 1)$ e tomemos $$f_c = \frac{1 - p}{p}\textrm{.}$$
+        Então $f_c \in (0, 1)$.
+        Consideremos $L_n$ e $R_n$ as espécies que estão vivas no tempo $n$ que são menores e maiores que $f_c$, respectivamente. Ou seja, $L_n \subseteq (0, f_c)$ e $R_n \subseteq (f_c, 1)$. A notação $|A|$ indica a cardinalidade de $A$. Então:
+
+        \begin{theorem} \cite{guiol2009stochastic}
+            \renewcommand{\theenumi}{\alph{enumi}} 
+            \begin{enumerate}
+                \item $|L_n|$ é uma cadeia de nascimento-morte recorrente nula. Em particular, $L_n$ é vazio infinitas vezes com probabilidade um.
+                \item Se $f_c < a < b < 1$, então $$\lim_{n \to \infty} \dfrac{1}{n} |R_n \cap (a, b)| = p(b - a) \textrm{.}$$
+            \end{enumerate}
+        \end{theorem}
+
+        São resultados muito fortes, porém \citeonline{guiol2009stochastic} resume dizendo que assintoticamente a distribuição das espécies se dá uniformemente em $(f_c, 1)$.
+
+        \subsection{Modelo a tempo contínuo}
+        
         \subsection{Modelo a tempo discreto}
     
     \section{\uppercase{Implementação}}
