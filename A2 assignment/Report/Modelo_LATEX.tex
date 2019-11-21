@@ -1,0 +1,97 @@
+\documentclass[10pt,brazil,english]{article}
+\usepackage{amsfonts}
+\usepackage{infocomp}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[english, portuguese]{babel}
+\addto\captionsportuguese{
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+\renewcommand{\refname}{REFER\^{E}NCIAS}
+}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{setspace} % espacamento entre linhas
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{scalefnt}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{caption}
+\usepackage[sort,compress]{cite}
+\usepackage[alf,abnt-repeated-author-omit=yes,abnt-etal-list=0]{abntex2cite}	% CitaÃ§Ãµes padrÃ£o ABNT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\setcounter{page}{1}
+\fancyhead{ }
+\lhead{}
+\chead{\footnotesize A PREENCHER}
+\rhead{}
+\cfoot{}
+\rfoot{\thepage}%Direita do Rodapé
+\renewcommand{\headrulewidth}{1pt}% Traço horizontal no cabeçalho
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{rangecite}
+
+%\hyphenation{po-pu-la-ri-za-ção re-gis-tros do-mi-na-do-ra vio-la pe-ram-bu-lam dou-tri-na-ria-men-te co-nhe-ce-rem Ad-mis-tra-ção fa-bri-car so-cie-da-de in-fe-rio-res vee-men-te-men-te si-tua-ção pon-tuais}
+
+\sloppy
+\renewcommand{\captionfont}{\footnotesize}
+\renewcommand{\captionlabelfont}{\footnotesize \bfseries}
+\newtheorem{exemplo}{Exemplo}
+\title{A PREENCHER}
+
+\address{
+$^{1}$Fundação Getulio Vargas (FGV)}
+
+\author{Lucas Emanuel Resck Domingues$^{1}$}
+
+\selectlanguage{english}
+
+\abstract{To be filled.}
+
+\keywords{To. Be. Filled.}
+
+\selectlanguage{brazil}
+
+\resumo {A preencher.}
+
+\palchaves{A. Preencher.}
+
+\begin{document}
+    \pagestyle{fancy} % CABECALHOO
+    
+    \maketitle
+    \newpage
+    
+    \section{\uppercase{Introdução}}
+    
+        \cite{bak1993punctuated}
+        \cite{guiol2009stochastic}
+        \cite{khouri2013estudos}
+    
+    \section{\uppercase{Modelo Bak-Sneppen}}
+    
+    \section{\uppercase{Modelo GMS}}
+
+        \subsection{Modelo a tempo contínuo}
+
+        \subsection{Modelo a tempo discreto}
+    
+    \section{\uppercase{Implementação}}
+
+    \section{\uppercase{Resultados}}
+
+    \section{\uppercase{Discussão}}
+
+    \bibliography{Referencias}
+    
+\end{document} 
