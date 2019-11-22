@@ -88,7 +88,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
             \item O mesmo se repete para seus dois vizinhos.
         \end{enumerate}
 
-        O modelo é relativamente simples, e no artigo é sugerido que a distribuição dos \textit{fitness} converge para uma uniforme em $(f^*, 1]$, com $f^* \approx 2/3$.
+        O modelo é relativamente simples, e no artigo é sugerido que a distribuição dos \textit{fitnesses} converge para uma uniforme em $(f^*, 1]$, com $f^* \approx 2/3$.
 
     \section{\uppercase{Modelo GMS}}
 
@@ -114,13 +114,49 @@ $^{1}$Fundação Getulio Vargas (FGV)}
             \end{enumerate}
         \end{theorem}
 
-        São resultados muito fortes, porém \citeonline{guiol2009stochastic} resume dizendo que assintoticamente a distribuição das espécies se dá uniformemente em $(f_c, 1)$.
+        São resultados muito fortes, porém \citeonline{guiol2009stochastic} resumem dizendo que assintoticamente a distribuição das espécies se dá uniformemente em $(f_c, 1)$.
 
     \section{\uppercase{Implementação}}
 
         A implementação dos modelos foi realizada em \textit{Python} e os resultados foram visualizados em \textit{Jupyter Notebook} \cite{domingues2019github}.
 
+        O objetivo da implementação é verificar os resultados apresentados que dizem respeito à convergência da distribuição dos \textit{fitnesses}.
+
     \section{\uppercase{Resultados}}
+
+        \subsection{Modelo Bak-Sneppen}
+
+            O algoritmo implementado para o modelo foi executado com 2000 espécies por 1 milhão de iterações.
+            A Figura \ref{Fig1} mostra um histograma dos \textit{fitnesses}.
+
+            \begin{figure}[!hbtp]
+                \begin{center}
+                    \includegraphics[scale=0.5]{Images/5-1.png}
+                \end{center}
+                \caption{Histograma dos \textit{fitnesses} para 2000 espécies em um milhão de iterações.}
+                \label{Fig1}
+            \end{figure}
+
+        \subsection{Modelo GMS}
+
+            O algoritmo implementado para o modelo foi executado com cem mil iterações.
+            A Figura \ref{Fig2} mostra um histograma dos \textit{fitnesses} quando $p = 2/3$, e a Figura \ref{Fig3}, quando $p = 3/5$.
+
+            \begin{figure}[!hbtp]
+                \begin{center}
+                    \includegraphics[scale=0.5]{Images/5-2-1.png}
+                \end{center}
+                \caption{Histograma dos \textit{fitnesses} para $p = 2/3$ em cem mil iterações.}
+                \label{Fig2}
+            \end{figure}
+
+            \begin{figure}[!hbtp]
+                \begin{center}
+                    \includegraphics[scale=0.5]{Images/5-2-2.png}
+                \end{center}
+                \caption{Histograma dos \textit{fitnesses} para $p = 3/5$ em cem mil iterações.}
+                \label{Fig3}
+            \end{figure}            
 
     \section{\uppercase{Discussão}}
 
