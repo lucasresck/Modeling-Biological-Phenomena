@@ -107,6 +107,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
         Consideremos $L_n$ e $R_n$ as espécies que estão vivas no tempo $n$ que são menores e maiores que $f_c$, respectivamente. Ou seja, $L_n \subseteq (0, f_c)$ e $R_n \subseteq (f_c, 1)$. A notação $|A|$ indica a cardinalidade de $A$. Então:
 
         \begin{theorem} \cite{guiol2009stochastic}
+            \label{theorem1}
             \renewcommand{\theenumi}{\alph{enumi}} 
             \begin{enumerate}
                 \item $|L_n|$ é uma cadeia de nascimento-morte recorrente nula. Em particular, $L_n$ é vazio infinitas vezes com probabilidade um.
@@ -120,7 +121,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
         A implementação dos modelos foi realizada em \textit{Python} e os resultados foram visualizados em \textit{Jupyter Notebook} \cite{domingues2019github}.
 
-        O objetivo da implementação é verificar os resultados apresentados que dizem respeito à convergência da distribuição dos \textit{fitnesses}.
+        O objetivo desta etapa é verificar os resultados apresentados que dizem respeito à convergência da distribuição dos \textit{fitnesses}.
 
     \section{\uppercase{Resultados}}
 
@@ -159,6 +160,29 @@ $^{1}$Fundação Getulio Vargas (FGV)}
             \end{figure}            
 
     \section{\uppercase{Discussão}}
+
+        O que ambos os modelos tentam aproximar é um processo de evolução e seleção natural.
+        O modelo de Bak-Sneppen dispõe as espécies em um grafo, como uma tentativa de representar uma interação entre as espécies, como predação e comensalismo \cite{khouri2013estudos}.
+        A cada rodada, a espécie menos adaptada é eliminada, de modo que surge outra espécie com \textit{fitness} aleatório, ou seja, o número de espécies é fixo.
+        E o processo se repete.
+
+        O modelo GMS adota um número de espécies variável, mas não considera interação entre as espécies.
+        A não ser por essas considerações, o modelo funciona de maneira parecida: espécies surgem com \textit{fitness} aleatório e aquelas menos adaptadas morrem.
+
+        A Figura \ref{Fig1} mostra um histograma próximo daquele de uma distribuição uniforme em $(2/3, 1]$, como é sugerido por \citeonline{bak1993punctuated}.
+
+        A Figura \ref{Fig2} mostra um histograma próximo daquele de uma distribuição $(1/2, 1]$. Observe que $p = 2/3$.
+        O Teorema \ref{theorem1} nos diz que, no limite, a distribuição das espécies é $(f_c, 1)$, com $f_c = (1 - 2/3)/(2/3) = 1/2$.
+        Ora, é isso que observamos.
+
+        Análogo à Figura \ref{Fig2}, a Figura \ref{Fig3} aproxima uma distribuição uniforme em $(2/3, 1]$, o que é esperado para valor $p = 3/5$ considerado.
+
+        As simulações reforçam o que esperar das distribuições dos \textit{fitness} das espécies para cada modelo.
+
+        Os modelos apresentados e testados possuem a vantagem de ser suficientemente simples (ao ponto de serem didáticos), em que evolução e seleção natural são resumidas em poucos passos de um algoritmo bem direto.
+        Porém, toda essa simplicidade e didática refletem, de certa forma, erros conceituais importantes no estudo biológico.
+
+        \citeonline{khouri2013estudos} aponta que ambos os modelos se baseiam na ideia do equilíbrio pontuado.
 
     \bibliography{Referencias}
     
