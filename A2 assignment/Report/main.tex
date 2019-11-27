@@ -28,6 +28,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fancyhdr}
 \usepackage{mathtools}
+\usepackage{icomma}
 \setcounter{page}{1}
 \fancyhead{ }
 \lhead{}
@@ -58,8 +59,8 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 \abstract{
     This work presents some stochastic models for species evolution: the Bak-Sneppen model \cite{bak1993punctuated} and the GMS model \cite{guiol2009stochastic}, both studied by \citeonline{khouri2013estudos}.
     Important evolutionary concepts for the discussion of these models are presented, such as natural selection.
-    The models are discrete and work with species adaptation degrees (fitness) for natural selection.
-    Implementations of simulation with Python language are performed, and fitness distributions graphics are obtained.
+    The models are discrete and work with species adaptation degrees (fitnesses) for natural selection.
+    Implementations of simulation with Python language are performed, and fitnesses distributions graphics are obtained.
     It's suggested or demonstrated that these distributions converge in these models, and the simulation results are used as verification.
     The latter is done from the graphics and the hypothesis testing of the parameters of the distributions.
     Advantages and conceptual errors of the models are discussed.
@@ -72,8 +73,8 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 \resumo {
     Este trabalho apresenta alguns modelos estocásticos para evolução de espécies: o modelo introduzido por \citeonline{bak1993punctuated} e o modelo introduzido por \citeonline{guiol2009stochastic}, ambos estudados por \citeonline{khouri2013estudos}.
     São apresentados conceitos evolutivos importantes para a discussão desses modelos, como seleção natural.
-    Os modelos são discretos e trabalham com graus de adaptação das espécies (\textit{fitness}) para a seleção natural.
-    Implementações de simulações utilizando a linguagem \textit{Python} são realizadas, e gráficos das distribuições dos \textit{fitness} são obtidos.
+    Os modelos são discretos e trabalham com graus de adaptação das espécies (\textit{fitnesses}) para a seleção natural.
+    Implementações de simulações utilizando a linguagem \textit{Python} são realizadas, e gráficos das distribuições dos \textit{fitnesses} são obtidos.
     É sugerido ou demonstrado que essas distribuições convergem nesses modelos, e os resultados das simulações são utilizados como verificação.
     Esta se dá a partir dos gráficos e de testes de hipóteses do parâmetro da distribuição.
     Vantagens e erros conceituais dos modelos são discutidos.
@@ -96,7 +97,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
         A Teoria Evolutiva diz que os seres vivos surgiram todos de um ancestral comum, que se modificou ao longo do tempo, por diversos fatores.
         
         A seleção natural talvez seja o mecanismo mais forte da Teoria Evolutiva.
-        Basicamente é um algoritmo que seleciona os indivíduos melhor adaptados e permite que eles se reproduzam.
+        Basicamente é um algoritmo que seleciona os indivíduos melhor adaptados para que se reproduzam e perpetuem suas características.
         \citeonline{khouri2013estudos} exemplica com bactérias. Suponhamos que, em uma placa de Petri, haja uma colônia de bactérias suficientemente já desenvolvida (com milhões de indivíduos).
         Despejamos um antibiótico nessa placa e, após certo tempo, observamos que algumas bactérias sobreviveram e se reproduziram.
         Essa "nova colônia" \space agora é resistente a esse antibiótico.
@@ -105,16 +106,16 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
         Dessa forma, este trabalho tem como objetivos analisar e simular ambientes de seleção natural propostos por \citeonline{bak1993punctuated} e \citeonline{guiol2009stochastic}.
         Na verdade, ele foi inspirado na dissertação de \citeonline{khouri2013estudos}, que estuda e compara esses modelos.
-        São modelos discretos simples de seleção natural, mas com algumas implicações sobre as distribuições dos graus de adaptação (\textit{fitness}).
+        São modelos discretos simples de seleção natural, mas com algumas implicações sobre as distribuições dos graus de adaptação (\textit{fitnesses}).
 
-        Na seção 2, apresento o modelo que chamarei de Bak-Sneppen e a sugestão do autor de convergência da distribuição dos \textit{fitness}.
+        Na seção 2, apresento o modelo que chamarei de Bak-Sneppen e a sugestão do autor de convergência da distribuição dos \textit{fitnesses}.
         Na seção 3, apresento o modelo GMS, além de um teorema forte apresentado pelos autores.
         A seção 4 introduz a implementação da simulação dos modelos.
         Na seção 5, apresento gráficos das distribuições obtidas pelas simulações.
         
         As discussões dos resultados e de conceitos se dão na seção 6.
         Os modelos são interpretados, assim como seus resultados.
-        Além disso, são testadas hipóteses relativas a parâmetros da distribução dos \textit{fitness}.
+        Além disso, são testadas hipóteses relativas aos parâmetros das distribuções dos \textit{fitnesses}.
         Ao final, erros conceituais dos modelos são discutidos, principalmente no que diz respeito a equilíbro pontuado e gradualismo.
 
         Este é um trabalho avaliado para a disciplina Modelagem de Fenômenos Biológicos, ministrada por Claudio Struchiner, da Escola de Matemática Aplicada da Fundação Getulio Vargas.
@@ -127,7 +128,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
         \renewcommand{\theenumi}{\roman{enumi}} 
         \begin{enumerate}
             \item $N$ espécies são distribuídas em um grafo circular;
-            \item A cada espécie, é associado um número, chamado \textit{\textbf{fitness}}, que é uma amostra de uma distribuição uniforme em $[0, 1]$;
+            \item A cada espécie é associado um número, chamado \textit{\textbf{fitness}}, que é uma amostra de uma distribuição uniforme em $[0, 1]$;
             \item Em cada "rodada", o indivíduo com o menor \textit{fitness} tem seu número sorteado novamente;
             \item O mesmo se repete para seus dois vizinhos.
         \end{enumerate}
@@ -148,6 +149,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
         Os autores apresentam alguns resultados. Seja $p$ tal que $p \in (1/2, 1)$ e tomemos $$f_c = \frac{1 - p}{p}\textrm{.}$$
         Então $f_c \in (0, 1)$.
+        Vamos representar as espécies a partir do seu \textit{fitness}.
         Consideremos $L_n$ e $R_n$ as espécies que estão vivas no tempo $n$ que são menores e maiores que $f_c$, respectivamente. Ou seja, $L_n \subseteq (0, f_c)$ e $R_n \subseteq (f_c, 1)$. A notação $|A|$ indica a cardinalidade de $A$. Então:
 
         \begin{theorem} \cite{guiol2009stochastic}
@@ -165,7 +167,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
         A implementação dos modelos foi realizada em \textit{Python} e os resultados foram visualizados em \textit{Jupyter Notebook} \cite{domingues2019github}.
 
-        O objetivo desta etapa é verificar os resultados apresentados que dizem respeito à convergência da distribuição dos \textit{fitnesses}.
+        O objetivo desta etapa é verificar os resultados apresentados que dizem respeito à convergência das distribuições dos \textit{fitnesses}.
 
     \section{RESULTADOS}
 
@@ -208,7 +210,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
         Ambos os modelos tentam aproximar um processo de evolução por seleção natural.
         O modelo de Bak-Sneppen dispõe as espécies em um grafo, como uma tentativa de representar uma interação entre as espécies, como predação e comensalismo \cite{khouri2013estudos}.
         A cada rodada, a espécie menos adaptada é eliminada, de modo que surge outra espécie com \textit{fitness} aleatório, ou seja, o número de espécies é fixo.
-        O mesmo acontece para seus dois vizinhos, representando então a interação entre as espécies.
+        O mesmo acontece para seus dois vizinhos.
         E o processo se repete.
 
         O modelo GMS adota um número de espécies variável, mas não considera interação entre as espécies (ou seja, os vizinhos não morrem juntos).
@@ -238,7 +240,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
         A Figura \ref{Fig2} mostra um histograma próximo daquele de uma distribuição $(1/2, 1]$. Observe que $p = 2/3$.
         O Teorema \ref{theorem1} nos diz que, no limite, a distribuição das espécies é $(f_c, 1)$, com $f_c = (1 - 2/3)/(2/3) = 1/2$.
         Ora, é isso que observamos. Vamos testar essa hipótese.
-        Tomamos uma amostra aleatória $X_1, \cdots, X_{1000}$, com $X_i \sim u(f_c, 1]$ para $i = 1, \cdots, 1000$.
+        Tomamos uma amostra aleatória $X_1, \cdots, X_{50}$, com $X_i \sim u(f_c, 1]$ para $i = 1, \cdots, 50$.
         Sejam as hipóteses:
 
         \begin{equation}
@@ -249,7 +251,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
             \end{aligned}
         \end{equation}
 
-        Seja $Y = \min_{i = 1, \cdots, 1000}(X_i)$. Rejeito $H_0$ se $Y \notin (1/2 - c, 1/2 + c)$.
+        Seja $Y = \min_{i = 1, \cdots, 50}(X_i)$. Rejeito $H_0$ se $Y \notin (1/2 - c, 1/2 + c)$.
         Para um teste nível $\alpha_0 = 0,05$, calculo $c = 0,029$.
 
         O teste foi realizado para a distribuição apresentada na Figura \ref{Fig2}, em que $p = 2/3$.
@@ -262,7 +264,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
         Foi observado $y = 0,672$ e $H_0$ não foi rejeitada.
 
-        As simulações e os testes reforçam o que esperar das distribuições dos \textit{fitness} das espécies para cada um dos modelos.
+        As simulações e os testes de hipóteses reforçam o que esperar das distribuições dos \textit{fitnesses} das espécies para cada um dos modelos.
 
         Os modelos apresentados e testados possuem a vantagem de ser suficientemente simples (ao ponto de serem didáticos), em que evolução e seleção natural são resumidas em poucos passos de um algoritmo bem direto.
         Porém, toda essa simplicidade e didática refletem, de certa forma, erros conceituais importantes no estudo biológico.
@@ -272,8 +274,11 @@ $^{1}$Fundação Getulio Vargas (FGV)}
         Ou seja, longos períodos sem grandes mutações e pequenos períodos com muita variação.
         Isso é refletido principalmente ao se observar registros fósseis, que podem apresentar esse tipo de padrão \cite{khouri2013estudos}.
 
-        Porém, atualmente o equilíbrio pontuado já não é mais tanto aceito, e a teoria predominante é a do gradualismo, em que a evolução ocorre de forma gradual \cite{khouri2013estudos}.
+        Porém, atualmente o equilíbrio pontuado já não é mais tanto aceito, e a teoria predominante é a do gradualismo, em que a evolução ocorre de forma gradual.
+        Inclusive é possível obter registros fósseis que apresentem evolução gradual \cite{khouri2013estudos}.
 
+        Ambos os modelos trabalham a seleção natural no nível das espécies, ou seja, espécies são selecionadas.
+        Porém, \citeonline{khouri2013estudos} ressalta que atualmente já é bastante aceito que isso não acontece, e que a seleção natural, na verdade, acontece no nível dos genótipos.
 
     \bibliography{Referencias}
     
