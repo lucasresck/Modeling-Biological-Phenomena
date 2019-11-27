@@ -73,9 +73,37 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
     \newtheorem{theorem}{Teorema}
     
-    \section{\uppercase{Introdução}}
+    \section{INTRODUÇÃO}
+
+        A Evolução é uma das teorias mais sofisticadas da Biologia, principalmente pela sua simplicidade algorítmica.
+        Desde o início da busca pelo conhecimento, os seres humanos tentaram entender a origem dos seres vivos.
+        A Teoria Evolutiva diz que os seres vivos surgiram todos de um ancestral comum, que se modificou ao longo do tempo, por diversos fatores.
+        
+        A seleção natural talvez seja o mecanismo mais forte da Teoria Evolutiva.
+        Basicamente é um algoritmo que seleciona os indivíduos melhor adaptados e permite que eles se reproduzam.
+        \citeonline{khouri2013estudos} exemplica com bactérias. Suponhamos que, em uma placa de Petri, haja uma colônia de bactérias suficientemente já desenvolvida (com milhões de indivíduos).
+        Despejamos um antibiótico nessa placa e, após certo tempo, observamos que algumas bactérias sobreviveram e se reproduziram.
+        Essa "nova colônia" \space agora é resistente a esse antibiótico.
+        Isso se deve ao fato de que existiam bactérias na colônia inicial que eram resistentes ao componente.
+        Quando o despejamos, selecionamos aqueles indivíduos resistentes, que se reproduziram e passaram essa característica de resistência adiante.
+
+        Dessa forma, este trabalho tem como objetivos analisar e simular ambientes de seleção natural propostos por \citeonline{bak1993punctuated} e \citeonline{guiol2009stochastic}.
+        Na verdade, ele foi inspirado na dissertação de \citeonline{khouri2013estudos}, que estuda e compara esses modelos.
+        São modelos discretos simples de seleção natural, mas com algumas implicações sobre as distribuições dos graus de adaptação (\textit{fitness}).
+
+        Na seção 2, apresento o modelo que chamarei de Bak-Sneppen e a sugestão do autor de convergência da distribuição dos \textit{fitness}.
+        Na seção 3, apresento o modelo GMS, além de um teorema forte apresentado pelos autores.
+        A seção 4 introduz a implementação da simulação dos modelos.
+        Na seção 5, apresento gráficos das distribuições obtidas pelas simulações.
+        
+        As discussões dos resultados e de conceitos se dão na seção 6.
+        Os modelos são interpretados, assim como seus resultados.
+        Além disso, são testadas hipóteses relativas a parâmetros da distribução dos \textit{fitness}.
+        Ao final, erros conceituais dos modelos são discutidos, principalmente no que diz respeito a equilíbro pontuado e gradualismo.
+
+        Este é um trabalho avaliado para a disciplina Modelagem de Fenômenos Biológicos, ministrada por Claudio Struchiner, da Escola de Matemática Aplicada da Fundação Getulio Vargas.
     
-    \section{\uppercase{Modelo Bak-Sneppen}}
+    \section{MODELO BAK-SNEPPEN}
 
         \citeonline{bak1993punctuated} introduziram o modelo que chamarei de Bak-Sneppen.
         Seu funcionamento é descrito de forma direta por \citeonline{khouri2013estudos}:
@@ -90,7 +118,7 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
         O modelo é relativamente simples, e no artigo é sugerido que a distribuição dos \textit{fitnesses} converge para uma uniforme em $(f^*, 1]$, com $f^* \approx 2/3$.
 
-    \section{\uppercase{Modelo GMS}}
+    \section{MODELO GMS}
 
         \citeonline{guiol2009stochastic} se basearam no modelo Bak-Sneppen para criar outro modelo, que \citeonline{khouri2013estudos} chama de GMS (as iniciais dos autores). Chamaremos assim neste trabalho. Ele é descrito:
 
@@ -117,13 +145,13 @@ $^{1}$Fundação Getulio Vargas (FGV)}
 
         São resultados muito fortes, porém \citeonline{guiol2009stochastic} resumem dizendo que assintoticamente a distribuição das espécies se dá uniformemente em $(f_c, 1)$.
 
-    \section{\uppercase{Implementação}}
+    \section{IMPLEMENTAÇÃO}
 
         A implementação dos modelos foi realizada em \textit{Python} e os resultados foram visualizados em \textit{Jupyter Notebook} \cite{domingues2019github}.
 
         O objetivo desta etapa é verificar os resultados apresentados que dizem respeito à convergência da distribuição dos \textit{fitnesses}.
 
-    \section{\uppercase{Resultados}}
+    \section{RESULTADOS}
 
         \subsection{Modelo Bak-Sneppen}
 
@@ -159,30 +187,77 @@ $^{1}$Fundação Getulio Vargas (FGV)}
                 \label{Fig3}
             \end{figure}            
 
-    \section{\uppercase{Discussão}}
+    \section{DISCUSSÕES}
 
-        O que ambos os modelos tentam aproximar é um processo de evolução e seleção natural.
+        Ambos os modelos tentam aproximar um processo de evolução por seleção natural.
         O modelo de Bak-Sneppen dispõe as espécies em um grafo, como uma tentativa de representar uma interação entre as espécies, como predação e comensalismo \cite{khouri2013estudos}.
         A cada rodada, a espécie menos adaptada é eliminada, de modo que surge outra espécie com \textit{fitness} aleatório, ou seja, o número de espécies é fixo.
+        O mesmo acontece para seus dois vizinhos, representando então a interação entre as espécies.
         E o processo se repete.
 
-        O modelo GMS adota um número de espécies variável, mas não considera interação entre as espécies.
+        O modelo GMS adota um número de espécies variável, mas não considera interação entre as espécies (ou seja, os vizinhos não morrem juntos).
         A não ser por essas considerações, o modelo funciona de maneira parecida: espécies surgem com \textit{fitness} aleatório e aquelas menos adaptadas morrem.
 
         A Figura \ref{Fig1} mostra um histograma próximo daquele de uma distribuição uniforme em $(2/3, 1]$, como é sugerido por \citeonline{bak1993punctuated}.
+        Vamos realizar um teste da nossa hipótese.
+        Nas simulações realizadas, obtivemos uma distribuição.
+        Vamos amostrar dessa distribuição, supondo que ela seja uniforme em $(f_c, 1]$.
+        Ou seja, tomamos uma amostra aleatória $X_1, \cdots, X_{50}$, com $X_i \sim u(f_c, 1]$ para $i = 1, \cdots, 50$.
+        Sejam as hipóteses:
+
+        \begin{equation}
+            \label{eq1}
+            \begin{aligned}
+                H_0&: f_c = 2/3, \\
+                H_1&: f_c \neq 2/3
+            \end{aligned}
+        \end{equation}
+
+        Seja $Y = \min_{i = 1, \cdots, 50}(X_i)$. Rejeito $H_0$ se $Y \notin (2/3 - c, 2/3 + c)$.
+        Para um teste nível $\alpha_0 = 0,05$, calculo $c = 0,019$.
+
+        O teste foi realizado para a distribuição apresentada na Figura \ref{Fig1}.
+        Foi observado $y = 0,656$ e $H_0$ não foi rejeitada.
 
         A Figura \ref{Fig2} mostra um histograma próximo daquele de uma distribuição $(1/2, 1]$. Observe que $p = 2/3$.
         O Teorema \ref{theorem1} nos diz que, no limite, a distribuição das espécies é $(f_c, 1)$, com $f_c = (1 - 2/3)/(2/3) = 1/2$.
-        Ora, é isso que observamos.
+        Ora, é isso que observamos. Vamos testar essa hipótese.
+        Tomamos uma amostra aleatória $X_1, \cdots, X_{1000}$, com $X_i \sim u(f_c, 1]$ para $i = 1, \cdots, 1000$.
+        Sejam as hipóteses:
+
+        \begin{equation}
+            \label{eq2}
+            \begin{aligned}
+                H_0&: f_c = 1/2, \\
+                H_1&: f_c \neq 1/2
+            \end{aligned}
+        \end{equation}
+
+        Seja $Y = \min_{i = 1, \cdots, 1000}(X_i)$. Rejeito $H_0$ se $Y \notin (1/2 - c, 1/2 + c)$.
+        Para um teste nível $\alpha_0 = 0,05$, calculo $c = 0,029$.
+
+        O teste foi realizado para a distribuição apresentada na Figura \ref{Fig2}, em que $p = 2/3$.
+        Foi observado $y = 0,493$ e $H_0$ não foi rejeitada.
 
         Análogo à Figura \ref{Fig2}, a Figura \ref{Fig3} aproxima uma distribuição uniforme em $(2/3, 1]$, o que é esperado para valor $p = 3/5$ considerado.
+        Vamos testar essa hipótese.
+        Observe que estamos lidando com a mesma distribuição do caso para o modelo Bak-Sneppen e as mesmas hipóteses de \ref{eq1}.
+        Dessa forma, o teste é o mesmo.
 
-        As simulações reforçam o que esperar das distribuições dos \textit{fitness} das espécies para cada modelo.
+        Foi observado $y = 0,672$ e $H_0$ não foi rejeitada.
+
+        As simulações e os testes reforçam o que esperar das distribuições dos \textit{fitness} das espécies para cada um dos modelos.
 
         Os modelos apresentados e testados possuem a vantagem de ser suficientemente simples (ao ponto de serem didáticos), em que evolução e seleção natural são resumidas em poucos passos de um algoritmo bem direto.
         Porém, toda essa simplicidade e didática refletem, de certa forma, erros conceituais importantes no estudo biológico.
 
         \citeonline{khouri2013estudos} aponta que ambos os modelos se baseiam na ideia do equilíbrio pontuado.
+        Esta é uma teoria evolutiva que modela a evolução não de um ponto de vista gradual, mas através de "saltos".
+        Ou seja, longos períodos sem grandes mutações e pequenos períodos com muita variação.
+        Isso é refletido principalmente ao se observar registros fósseis, que podem apresentar esse tipo de padrão \cite{khouri2013estudos}.
+
+        Porém, atualmente o equilíbrio pontuado já não é mais tanto aceito, e a teoria predominante é a do gradualismo, em que a evolução ocorre de forma gradual \cite{khouri2013estudos}.
+
 
     \bibliography{Referencias}
     
